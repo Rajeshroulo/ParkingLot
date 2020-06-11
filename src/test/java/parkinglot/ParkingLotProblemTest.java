@@ -12,7 +12,7 @@ public class ParkingLotProblemTest {
 
     @Before
     public void setup() throws Exception {
-        parkingLot = new ParkingLot( );
+        parkingLot = new ParkingLot(5);
     }
 
   @Test
@@ -73,16 +73,38 @@ public class ParkingLotProblemTest {
         }
     }
 
-    @Test
-    public void givenVehicleNumbersToPark_whenParkingLotIsFull_shouldThrowException() {
+  @Test
+  public void givenVehicleNumbersToPark_whenParkingLotIsFull_shouldThrowException() {
+        try {
         parkingLot.parkVehicle("TS08CV5421");
         parkingLot.parkVehicle("TA07EC3633");
         parkingLot.parkVehicle("AP24AC7684");
         parkingLot.parkVehicle("TN11WA4563");
-        try {
-            parkingLot.parkVehicle("KA12TH4651");
+        parkingLot.parkVehicle("KA12TH4651");
         } catch (ParkingLotException e) {
             assertEquals(ParkingLotException.ExceptionType.PARKINGLOT_IS_FULL, e.type);
+        }
+    }
+
+  @Test
+  public void givenWrongVehicleNumberToUnPark_shouldThrowException() {
+        try {
+        parkingLot.parkVehicle("TS08CV5421");
+        parkingLot.parkVehicle("TA07EC3633");
+        parkingLot.unparkVehicle("TA07TD8945");
+        } catch (ParkingLotException e) {
+            assertEquals(ParkingLotException.ExceptionType.NUMBER_IS_NOT_PRESENT,e.type);
+        }
+    }
+
+    @Test
+    public void givenSameVehicleNumberisParked_shouldThrowException() {
+        try {
+            parkingLot.parkVehicle("TS08CV5421");
+            parkingLot.parkVehicle("TA07EC3633");
+            parkingLot.parkVehicle("TA07EC3633");
+        } catch (ParkingLotException e) {
+            assertEquals(ParkingLotException.ExceptionType.NUMBER_EXISTING,e.type);
         }
     }
 

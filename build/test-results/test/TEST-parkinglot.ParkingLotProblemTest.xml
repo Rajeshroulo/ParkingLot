@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglot.ParkingLotProblemTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-06-11T12:53:20" hostname="LAPTOP-U0R5V4IK" time="0.034">
+<testsuite name="parkinglot.ParkingLotProblemTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-11T13:44:49" hostname="LAPTOP-U0R5V4IK" time="0.002">
   <properties/>
-  <testcase name="givenVehicle_whenParkedinParkingLot_shouldReturnCorrectSize" classname="parkinglot.ParkingLotProblemTest" time="0.002"/>
-  <testcase name="givenVehicleNumbersToPark_whenParkingLotIsFull_shouldThrowException" classname="parkinglot.ParkingLotProblemTest" time="0.001"/>
-  <testcase name="givenEmptyCarNumber_whenUnparked_shouldThrowExecption" classname="parkinglot.ParkingLotProblemTest" time="0.003"/>
-  <testcase name="givenVehicle_whentheNumberisNull_shouldThrowExecption" classname="parkinglot.ParkingLotProblemTest" time="0.001"/>
-  <testcase name="givenVehicle_whenNumberisNull_shouldThrowExecption" classname="parkinglot.ParkingLotProblemTest" time="0.001"/>
-  <testcase name="whenNoVehicleisParkedinParkingLot_shouldReturnEmpty" classname="parkinglot.ParkingLotProblemTest" time="0.0"/>
-  <testcase name="givenEmptyCarNumber_shouldThrowExecption" classname="parkinglot.ParkingLotProblemTest" time="0.002"/>
-  <testcase name="givenVehicle_whenUnparkedfromParkingLot_shouldReturnCorrectSize" classname="parkinglot.ParkingLotProblemTest" time="0.003"/>
+  <testcase name="givenSameVehicleNumberisParked_shouldThrowException" classname="parkinglot.ParkingLotProblemTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
