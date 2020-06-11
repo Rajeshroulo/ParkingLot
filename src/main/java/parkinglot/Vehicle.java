@@ -9,15 +9,11 @@ public class Vehicle {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public String getVehicleNumber() {
-        return vehicleNumber;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Vehicle)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Vehicle vehicle = (Vehicle) o;
-        return Objects.equals(getVehicleNumber(), vehicle.getVehicleNumber());
+        return Objects.equals(vehicleNumber, vehicle.vehicleNumber);
     }
 }

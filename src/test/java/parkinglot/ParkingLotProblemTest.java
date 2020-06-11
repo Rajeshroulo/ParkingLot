@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static parkinglot.ParkingLotException.ExceptionType.*;
 
 public class ParkingLotProblemTest {
@@ -11,11 +12,17 @@ public class ParkingLotProblemTest {
     ParkingLot parkingLot;
 
     @Before
-    public void setup() throws Exception {
+    public void setup()   {
         parkingLot = new ParkingLot(5);
     }
 
-  @Test
+    @Test
+    public void givenCar_whenParkedinparkingLot_shouldReturnTrue() {
+        boolean result = parkingLot.parkVehicle("OD 07 R 5160");
+        assertTrue(result);
+    }
+
+    @Test
   public void givenVehicle_whenParkedinParkingLot_shouldReturnCorrectSize(){
      parkingLot.parkVehicle("AP 30 M 2832");
      int size = parkingLot.getSize();
@@ -97,8 +104,8 @@ public class ParkingLotProblemTest {
         }
     }
 
-    @Test
-    public void givenSameVehicleNumberisParked_shouldThrowException() {
+  @Test
+  public void givenSameVehicleNumberisParked_shouldThrowException() {
         try {
             parkingLot.parkVehicle("TS08CV5421");
             parkingLot.parkVehicle("TA07EC3633");
@@ -108,6 +115,14 @@ public class ParkingLotProblemTest {
         }
     }
 
+  @Test
+    public void givenCarToUnpark_whenunparked_shouldReturnTrue(){
+      parkingLot.parkVehicle("TS08CV5421");
+      parkingLot.parkVehicle("TA07EC3633");
+      parkingLot.parkVehicle("AP 30 M 2832");
+      boolean result = parkingLot.unparkVehicle("TA07EC3633");
+      assertTrue(result);
+  }
 
 }
 
