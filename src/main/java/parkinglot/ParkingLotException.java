@@ -3,7 +3,7 @@ package parkinglot;
 public class ParkingLotException extends RuntimeException {
 
     enum ExceptionType {
-        ENTERED_NULL,ENTERED_EMPTY
+        ENTERED_NULL,ENTERED_EMPTY,PARKINGLOT_IS_FULL,NUMBER_EXISTING
     }
 
     ExceptionType type;

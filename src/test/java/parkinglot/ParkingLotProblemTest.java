@@ -12,66 +12,77 @@ public class ParkingLotProblemTest {
 
     @Before
     public void setup() throws Exception {
-        parkingLot = new ParkingLot();
+        parkingLot = new ParkingLot( );
     }
 
-    @Test
+  @Test
   public void givenVehicle_whenParkedinParkingLot_shouldReturnCorrectSize(){
-     parkingLot.park("AP 30 M 2832");
+     parkingLot.parkVehicle("AP 30 M 2832");
      int size = parkingLot.getSize();
      assertEquals(1,size);
+   }
 
-  }
-
-    @Test
-    public void whenNoVehicleisParkedinParkingLot_shouldReturnEmpty() {
+  @Test
+  public void whenNoVehicleisParkedinParkingLot_shouldReturnEmpty() {
         int size = parkingLot.getSize();
         assertEquals(0,size);
     }
 
-    @Test
-    public void givenVehicle_whenNumberisNull_shouldThrowExecption() {
+  @Test
+  public void givenVehicle_whenNumberisNull_shouldThrowExecption() {
         try {
-            parkingLot.park(null);
+            parkingLot.parkVehicle(null);
         } catch (ParkingLotException e) {
             assertEquals(ENTERED_NULL,e.type);
         }
     }
 
-    @Test
-    public void givenEmptyCarNumber_shouldThrowExecption() {
+  @Test
+  public void givenEmptyCarNumber_shouldThrowExecption() {
         try {
-            parkingLot.park("");
+            parkingLot.parkVehicle("");
         } catch (ParkingLotException e) {
             assertEquals(ENTERED_EMPTY,e.type);
         }
     }
 
-    @Test
-    public void givenVehicle_whenUnparkedfromParkingLot_shouldReturnCorrectSize(){
-        parkingLot.park("AP 30 M 2832");
-        parkingLot.park("AP 30 R 2843");
-        parkingLot.unpark("AP 30 M 2832");
+  @Test
+  public void givenVehicle_whenUnparkedfromParkingLot_shouldReturnCorrectSize(){
+        parkingLot.parkVehicle("AP 30 M 2832");
+        parkingLot.parkVehicle("AP 30 R 2843");
+        parkingLot.unparkVehicle("AP 30 M 2832");
         int size = parkingLot.getSize();
         assertEquals(1,size);
-
     }
 
-    @Test
-    public void givenVehicle_whentheNumberisNull_shouldThrowExecption() {
+  @Test
+  public void givenVehicle_whentheNumberisNull_shouldThrowExecption() {
         try {
-            parkingLot.unpark(null);
+            parkingLot.unparkVehicle(null);
         } catch (ParkingLotException e) {
             assertEquals(ENTERED_NULL,e.type);
         }
     }
 
-    @Test
-    public void givenEmptyCarNumber_whenUnparked_shouldThrowExecption() {
+  @Test
+  public void givenEmptyCarNumber_whenUnparked_shouldThrowExecption() {
         try {
-            parkingLot.unpark("");
+            parkingLot.unparkVehicle("");
         } catch (ParkingLotException e) {
             assertEquals(ENTERED_EMPTY,e.type);
+        }
+    }
+
+    @Test
+    public void givenVehicleNumbersToPark_whenParkingLotIsFull_shouldThrowException() {
+        parkingLot.parkVehicle("TS08CV5421");
+        parkingLot.parkVehicle("TA07EC3633");
+        parkingLot.parkVehicle("AP24AC7684");
+        parkingLot.parkVehicle("TN11WA4563");
+        try {
+            parkingLot.parkVehicle("KA12TH4651");
+        } catch (ParkingLotException e) {
+            assertEquals(ParkingLotException.ExceptionType.PARKINGLOT_IS_FULL, e.type);
         }
     }
 

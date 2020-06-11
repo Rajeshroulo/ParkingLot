@@ -4,19 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLot {
-
+    Vehicle vehicle;
+    int capacity =5;
     List<String> parkingDetails = new ArrayList<>();
 
-    public boolean park(String vehicleNumber) {
-            if(vehicleNumber == null)
-                throw new ParkingLotException("Entered Null", ParkingLotException.ExceptionType.ENTERED_NULL);
-            if(vehicleNumber.length() == 0)
-                throw new ParkingLotException("Entered Empty", ParkingLotException.ExceptionType.ENTERED_EMPTY);
-            parkingDetails.add(vehicleNumber);
+    public ParkingLot(int capacity){
+        this.capacity=capacity;
+    }
+
+    public ParkingLot() {
+
+    }
+
+    public boolean parkVehicle(String vehicleNumber) {
+        if(vehicleNumber == null)
+            throw new ParkingLotException("Entered Null", ParkingLotException.ExceptionType.ENTERED_NULL);
+        if(vehicleNumber.length() == 0)
+            throw new ParkingLotException("Entered Empty", ParkingLotException.ExceptionType.ENTERED_EMPTY);
+        if (parkingDetails.size() == capacity )
+            throw new ParkingLotException("Parking lot is full",
+                    ParkingLotException.ExceptionType.PARKINGLOT_IS_FULL);
+               parkingDetails.add(vehicleNumber);
             return true;
         }
 
-    public boolean unpark(String vehicleNumber) {
+    public boolean unparkVehicle(String vehicleNumber) {
         if(vehicleNumber == null)
             throw new ParkingLotException("Entered Null", ParkingLotException.ExceptionType.ENTERED_NULL);
         if(vehicleNumber.length() == 0)
