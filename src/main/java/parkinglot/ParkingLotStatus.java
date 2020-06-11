@@ -4,9 +4,14 @@ public class ParkingLotStatus {
 
     private ParkingLot parkingLot;
 
-    public void add(String vehcileNumber,Customer customer) {
-        parkingLot.add(vehcileNumber,customer);
+    public void add(String vehcileNumber) {
+        parkingLot.park(vehcileNumber);
     }
+
+    public void remove(String vehcileNumber) {
+        parkingLot.unpark(vehcileNumber);
+    }
+
 
     public int getParkingLotSize() {
         return parkingLot.getSize();
