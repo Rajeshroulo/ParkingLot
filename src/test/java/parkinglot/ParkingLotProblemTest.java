@@ -124,5 +124,13 @@ public class ParkingLotProblemTest {
       assertTrue(result);
      }
 
+  @Test
+    public void givenNewCar_whenParkedinparkingLot_shouldReturnTrue() {
+      parkingLot.parkVehicle(new Vehicle("AP 30 M 2832"));
+      boolean result = parkingLot.parkVehicle(new Vehicle("OD 07 R 5160"));
+        assertTrue(result);
+    }
+
+
 }
 
