@@ -25,13 +25,13 @@ public class ParkingLotProblemTest {
     @Test
   public void givenVehicle_whenParkedinParkingLot_shouldReturnCorrectSize(){
      parkingLot.parkVehicle(new Vehicle("AP 30 M 2832"));
-     int size = parkingLot.getSize();
+     int size = parkingLot.getOccupiedSpots();
      assertEquals(1,size);
    }
 
   @Test
   public void whenNoVehicleisParkedinParkingLot_shouldReturnEmpty() {
-        int size = parkingLot.getSize();
+        int size = parkingLot.getOccupiedSpots();
         assertEquals(0,size);
     }
 
@@ -56,9 +56,10 @@ public class ParkingLotProblemTest {
   @Test
   public void givenVehicle_whenUnparkedfromParkingLot_shouldReturnCorrectSize(){
         parkingLot.parkVehicle(new Vehicle("AP 30 M 2832"));
-        parkingLot.parkVehicle(new Vehicle("AP 30 R 2843"));
-        parkingLot.unparkVehicle(new Vehicle("AP 30 M 2832"));
-        int size = parkingLot.getSize();
+        Vehicle vehicle = new Vehicle("AP 30 R 2843");
+        parkingLot.parkVehicle(vehicle);
+        parkingLot.unparkVehicle(vehicle);
+        int size = parkingLot.getOccupiedSpots();
         assertEquals(1,size);
     }
 
@@ -117,11 +118,12 @@ public class ParkingLotProblemTest {
 
   @Test
     public void givenCarToUnpark_whenunparked_shouldReturnTrue(){
-      parkingLot.parkVehicle(new Vehicle("TS08CV5421"));
-      parkingLot.parkVehicle(new Vehicle("TA07EC3633"));
-      parkingLot.parkVehicle(new Vehicle("AP 30 M 2832"));
-      boolean result = parkingLot.unparkVehicle(new Vehicle("TA07EC3633"));
-      assertTrue(result);
+          parkingLot.parkVehicle(new Vehicle("TS08CV5421"));
+          Vehicle vehicle = new Vehicle("TA07EC3633");
+          parkingLot.parkVehicle(vehicle);
+          parkingLot.parkVehicle(new Vehicle("AP 30 M 2832"));
+          boolean result =  parkingLot.unparkVehicle(vehicle);
+          assertTrue(result);
      }
 
   @Test
@@ -131,6 +133,20 @@ public class ParkingLotProblemTest {
         assertTrue(result);
     }
 
+  @Test
+  public void givenVehicle_whenFound_shouldReturnParkedSpot(){
+      Vehicle vehicle1 = new Vehicle("TA07R3633");
+      parkingLot.parkVehicle(vehicle1);
+      Vehicle vehicle2 = new Vehicle("AP08A4554");
+      parkingLot.parkVehicle(vehicle2);
+      Vehicle vehicle3 = new Vehicle("OD05J1997");
+      parkingLot.parkVehicle(vehicle3);
+      int parkedSpot = parkingLot.getParkedSpot(vehicle2);
+      assertEquals(2,parkedSpot);
+
+
+
+  }
 
 }
 
