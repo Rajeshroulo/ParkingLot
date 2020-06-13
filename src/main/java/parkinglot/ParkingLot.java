@@ -6,13 +6,15 @@ import java.util.Map;
 
 public class ParkingLot {
     Vehicle vehicle;
-    private final int CAPACITY;
+    private final int CAPACITY=5;
     Map<Vehicle,ParkedDetails> parkingDetails = new HashMap<>();
-    int occupiedSpots = 0;
+    boolean[] spots = new boolean[CAPACITY];
 
+    public ParkingLot(){
+        for(int i=0; i < CAPACITY;i++){
+            spots[i] = false;
+        }
 
-    public ParkingLot(int capacity){
-        this.CAPACITY=capacity;
     }
 
     ParkingLotOwner parkingLotOwner= new ParkingLotOwner();
@@ -26,18 +28,34 @@ public class ParkingLot {
         if(parkingDetails.containsKey(vehicle))
             throw new ParkingLotException("Entered vehicle number existing in the list",
                     ParkingLotException.ExceptionType.NUMBER_EXISTING);
-        ParkedDetails parkedDetails = new ParkedDetails(++occupiedSpots, System.currentTimeMillis());
+        int spot = this.getParkingSpot();
+        ParkedDetails parkedDetails = new ParkedDetails(spot, System.currentTimeMillis());
         parkingDetails.put(vehicle,parkedDetails);
         return true;
         }
 
+    private int getParkingSpot() {
+        for(int i = 0; i < CAPACITY ;i++){
+            if(!spots[i]) {
+                spots[i] = true;
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
     public boolean unparkVehicle(Vehicle vehicle) {
          if (!parkingDetails.containsKey(vehicle))
             throw new ParkingLotException("Entered vehicle number is not present", ParkingLotException.ExceptionType.NUMBER_IS_NOT_PRESENT);
+        this.setParkedSpot(vehicle);
         parkingDetails.remove(vehicle);
-        occupiedSpots--;
         parkingLotOwner.availableSpace(CAPACITY - parkingDetails.size());
         return true;
+    }
+
+    private void setParkedSpot(Vehicle vehicle) {
+        int parkedSpot = this.getParkedSpot(vehicle);
+        spots[parkedSpot-1] = false;
     }
 
     public int getParkedSpot(Vehicle vehicle) {
@@ -59,5 +77,9 @@ public class ParkingLot {
         return System.currentTimeMillis() - parkingDetails.get(vehicle).getParkedTime();
     }
 
+    public void printSpotStatus() {
+        for(boolean spot:spots)
+            System.out.print(spot+" ");
+    }
 
 }

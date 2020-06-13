@@ -13,7 +13,7 @@ public class ParkingLotProblemTest {
 
     @Before
     public void setup()   {
-        parkingLot = new ParkingLot(5);
+        parkingLot = new ParkingLot( );
     }
 
     @Test
