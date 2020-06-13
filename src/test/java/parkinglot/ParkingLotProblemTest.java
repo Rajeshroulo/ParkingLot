@@ -143,9 +143,23 @@ public class ParkingLotProblemTest {
       parkingLot.parkVehicle(vehicle3);
       int parkedSpot = parkingLot.getParkedSpot(vehicle2);
       assertEquals(2,parkedSpot);
+  }
+
+  @Test
+    public void givenVehicleNumbersToPark_whenParked_shouldReturnNumberOfVehiclesParked() {
+        parkingLot.parkVehicle(new Vehicle("TS08CV5421"));
+        parkingLot.parkVehicle(new Vehicle("AP07EC1254"));
+        int numberOfOccupiedSpots = parkingLot.getOccupiedSpots();
+        assertEquals(2,numberOfOccupiedSpots);
+    }
 
 
-
+  @Test
+  public void givenVehicleNumbersToUnPark_whenUnPark_shouldReturnParkedTime() {
+      Vehicle vehicle = new Vehicle("AP30M2832");
+      parkingLot.parkVehicle(vehicle);
+      long parkedTime = parkingLot.getParkedTime(vehicle);
+      assertEquals(0,parkedTime);
   }
 
 }

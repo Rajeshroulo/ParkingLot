@@ -7,7 +7,7 @@ import java.util.Map;
 public class ParkingLot {
     Vehicle vehicle;
     private final int CAPACITY;
-    Map<Vehicle,Integer> parkingDetails = new HashMap<>();
+    Map<Vehicle,ParkedDetails> parkingDetails = new HashMap<>();
     int occupiedSpots = 0;
 
 
@@ -26,7 +26,8 @@ public class ParkingLot {
         if(parkingDetails.containsKey(vehicle))
             throw new ParkingLotException("Entered vehicle number existing in the list",
                     ParkingLotException.ExceptionType.NUMBER_EXISTING);
-        parkingDetails.put(vehicle,++occupiedSpots);
+        ParkedDetails parkedDetails = new ParkedDetails(++occupiedSpots, System.currentTimeMillis());
+        parkingDetails.put(vehicle,parkedDetails);
         return true;
         }
 
@@ -40,7 +41,7 @@ public class ParkingLot {
     }
 
     public int getParkedSpot(Vehicle vehicle) {
-        return parkingDetails.get(vehicle);
+        return parkingDetails.get(vehicle).getSpot();
     }
 
     public int getOccupiedSpots() {
@@ -53,5 +54,10 @@ public class ParkingLot {
             airportSecurity.full();
         }
     }
+
+    public long getParkedTime(Vehicle vehicle) {
+        return System.currentTimeMillis() - parkingDetails.get(vehicle).getParkedTime();
+    }
+
 
 }
