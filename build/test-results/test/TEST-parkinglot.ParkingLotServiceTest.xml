@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="parkinglot.ParkingLotServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-06-15T16:31:30" hostname="LAPTOP-U0R5V4IK" time="0.223">
+  <properties/>
+  <testcase name="givenVehicleNumberToPark_whenAllParkingLotsAreFull_shouldThrowException" classname="parkinglot.ParkingLotServiceTest" time="0.219"/>
+  <testcase name="givenNumberOfParkingLots_whenCreated_shouldReturnNumberOfLots" classname="parkinglot.ParkingLotServiceTest" time="0.001"/>
+  <testcase name="givenVehicleNumberToUnPark_whenUnParked_shouldReturnOccupiedSpots" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleNumberToPark_whenParked_shouldReturnOccupiedSpotsInALot" classname="parkinglot.ParkingLotServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
