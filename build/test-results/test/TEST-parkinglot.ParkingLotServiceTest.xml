@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="parkinglot.ParkingLotServiceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-06-16T17:14:57" hostname="LAPTOP-U0R5V4IK" time="0.024">
+  <properties/>
+  <testcase name="givenVehicleNumberToPark_whenParked_shouldReturnTotalVehicles" classname="parkinglot.ParkingLotServiceTest" time="0.017"/>
+  <testcase name="givenParkedVehicles_whenWhiteColouredCarsFound_shouldReturnitsLocation" classname="parkinglot.ParkingLotServiceTest" time="0.004"/>
+  <testcase name="givenVehicleNumberToPark_whenAllParkingLotsAreFull_shouldThrowException" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenNumberOfParkingLots_whenCreated_shouldReturnNumberOfLots" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleNumbersToPark_whenVehicleIsLarge_shouldAllocateRequiredSpace" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleNumberToUnPark_whenUnParked_shouldReturnOccupiedSpots" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleNumbersToPark_whenDriverDisAbled_shouldAllocateNearestSlot" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleNumberToPark_whenParked_shouldReturnOccupiedSpotsInALot" classname="parkinglot.ParkingLotServiceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

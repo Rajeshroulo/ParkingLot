@@ -33,8 +33,6 @@ public class ParkingLotService {
         if(vehicle == null && driver == null)
             throw new ParkingLotException("Entered null",ParkingLotException.ExceptionType.ENTERED_NULL);
         parkingStrategy.parkVehicle(parkingSlots,vehicle,driver);
-     //   this.directVehicle(vehicle,driver);
-      //  this.checkParkingSlotsFull();
     }
 
     private void directVehicle(Vehicle vehicle, Driver driver) {
@@ -110,6 +108,13 @@ public class ParkingLotService {
 
     public int getNumberOfVehiclesInParkingLot(){
         return this.getListOfVehiclesInParkingLot().size();
+    }
+
+    public List<Vehicle> getAllVehiclesBasedOnColor(Vehicle.VehicleColor color) {
+        List<Vehicle> listOfVehiclesInParkingLot = this.getListOfVehiclesInParkingLot();
+        return listOfVehiclesInParkingLot.stream()
+                .filter(vehicle -> vehicle.getVehicleColor().equals(color))
+                .collect(Collectors.toList());
     }
 
 }

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ParkingLotServiceTest {
@@ -112,6 +113,25 @@ public class ParkingLotServiceTest {
         parkingLotService.parkVehicle(vehicle2, Driver.NORMAL);
         ParkingSlot parkedSlot = parkingLotService.getParkedSlot(vehicle2);
         Assert.assertEquals(parkingSlot1,parkedSlot);
+    }
+
+    @Test
+    public void givenParkedVehicles_whenWhiteColouredCarsFound_shouldReturnitsLocation(){
+        ParkingSlot parkingSlot1 = new ParkingSlot(4);
+        ParkingSlot parkingSlot2 = new ParkingSlot(5);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE);
+        parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
+        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK);
+        parkingLotService.parkVehicle(vehicle2, Driver.NORMAL);
+        Vehicle vehicle3 = new Vehicle("OD23M0205",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE);
+        parkingLotService.parkVehicle(vehicle3, Driver.NORMAL);
+        List<Vehicle> vehicleList = Arrays.asList(vehicle1,vehicle3);
+        List<Vehicle> allVehiclesBasedOnColor = parkingLotService.getAllVehiclesBasedOnColor(Vehicle.VehicleColor.WHITE);
+        Assert.assertEquals(vehicleList,allVehiclesBasedOnColor);
     }
 
 }
