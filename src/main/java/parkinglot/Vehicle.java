@@ -6,8 +6,10 @@ public class Vehicle {
     private String vehicleNumber;
     private final VehicleSize vehicleSize;
     private final VehicleColor vehicleColor;
+    private final VehicleBrand vehicleBrand;
 
-    public Vehicle(String vehicleNumber, VehicleSize vehicleSize, VehicleColor vehicleColor ){
+
+    public Vehicle(String vehicleNumber, VehicleSize vehicleSize, VehicleColor vehicleColor,VehicleBrand vehicleBrand){
         if(vehicleNumber == null)
             throw new ParkingLotException("Entered Null", ParkingLotException.ExceptionType.ENTERED_NULL);
         if(vehicleNumber.length() == 0)
@@ -15,6 +17,7 @@ public class Vehicle {
         this.vehicleNumber = vehicleNumber;
         this.vehicleSize = vehicleSize;
         this.vehicleColor = vehicleColor;
+        this.vehicleBrand=vehicleBrand;
     }
 
     public VehicleColor getVehicleColor() {
@@ -26,7 +29,12 @@ public class Vehicle {
     }
 
     enum VehicleColor{
-        WHITE,BLACK
+        WHITE,BLACK,BLUE
+    }
+
+    enum VehicleBrand{
+        TOYOTA,BMW
+
     }
 
     @Override
@@ -50,6 +58,10 @@ public class Vehicle {
 
     public VehicleSize getVehicleSize() {
         return vehicleSize;
+    }
+
+    public VehicleBrand getVehicleBrand() {
+        return vehicleBrand;
     }
 
 }

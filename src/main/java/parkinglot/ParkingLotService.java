@@ -117,4 +117,11 @@ public class ParkingLotService {
                 .collect(Collectors.toList());
     }
 
+    public List<Vehicle> getVehiclesBasedonBrand(Vehicle.VehicleBrand vehicleBrand) {
+        List<Vehicle> listOfVehiclesInParkingLot = this.getListOfVehiclesInParkingLot();
+        return listOfVehiclesInParkingLot.stream()
+                .filter(vehicle -> vehicle.getVehicleBrand().equals(vehicleBrand))
+                .collect(Collectors.toList());
+    }
+
 }
