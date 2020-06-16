@@ -65,4 +65,20 @@ public class ParkingLotServiceTest {
         Assert.assertEquals(2,numberOfParkingLots);
     }
 
+    @Test
+    public void givenVehicleNumberToPark_whenParked_shouldReturnTotalVehicles() {
+        ParkingSlot parkingSlot1 = new ParkingSlot(3);
+        ParkingSlot parkingSlot2 = new ParkingSlot(5);
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+            parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS04AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS05AB4567",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK), Driver.NORMAL);
+        int totalVehicles = parkingLotService.getNumberOfVehiclesInParkingLot();
+        Assert.assertEquals(5,totalVehicles);
+    }
+
 }

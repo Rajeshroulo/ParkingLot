@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglot.ParkingLotServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-16T14:17:06" hostname="LAPTOP-U0R5V4IK" time="0.005">
+<testsuite name="parkinglot.ParkingLotServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-16T14:41:43" hostname="LAPTOP-U0R5V4IK" time="0.005">
   <properties/>
-  <testcase name="givenVehicleNumberToUnPark_whenUnParked_shouldReturnOccupiedSpots" classname="parkinglot.ParkingLotServiceTest" time="0.005"/>
+  <testcase name="givenNumberOfParkingLots_whenCreated_shouldReturnNumberOfLots" classname="parkinglot.ParkingLotServiceTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
