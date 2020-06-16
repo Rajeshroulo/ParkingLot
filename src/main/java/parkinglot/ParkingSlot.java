@@ -3,14 +3,14 @@ package parkinglot;
 import java.util.*;
 
 
-public class ParkingLot {
+public class ParkingSlot {
     Vehicle vehicle;
     public final int CAPACITY;
     Map<Vehicle, ParkedDetails> parkingDetails = new HashMap<>();
     boolean[] spots;
     List<ParkedDetails> parkedDetailsList = new ArrayList<>();
 
-    public ParkingLot(int capacity) {
+    public ParkingSlot(int capacity) {
         this.CAPACITY = capacity;
         spots = new boolean[CAPACITY];
         for (int i = 0; i < CAPACITY; i++) {

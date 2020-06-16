@@ -9,11 +9,11 @@ import static parkinglot.ParkingLotException.ExceptionType.*;
 
 public class ParkingLotProblemTest {
 
-    ParkingLot parkingLot;
+    ParkingSlot parkingLot;
 
     @Before
     public void setup()   {
-        parkingLot = new ParkingLot( 5);
+        parkingLot = new ParkingSlot( 5);
     }
 
     @Test
