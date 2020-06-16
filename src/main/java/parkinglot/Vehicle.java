@@ -1,7 +1,6 @@
 package parkinglot;
 
 import java.util.Objects;
-import java.awt.*;
 
 public class Vehicle {
     private String vehicleNumber;
@@ -35,12 +34,14 @@ public class Vehicle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vehicle vehicle = (Vehicle) o;
-        return Objects.equals(vehicleNumber, vehicle.vehicleNumber);
+        return vehicleSize == vehicle.vehicleSize &&
+                Objects.equals(vehicleNumber, vehicle.vehicleNumber) &&
+                vehicleColor == vehicle.vehicleColor;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(vehicleNumber);
+        return Objects.hash(vehicleSize,vehicleNumber,vehicleColor);
     }
 
     public String getVehicleNumber() {

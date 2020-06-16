@@ -81,4 +81,37 @@ public class ParkingLotServiceTest {
         Assert.assertEquals(5,totalVehicles);
     }
 
+    @Test
+    public void givenVehicleNumbersToPark_whenDriverDisAbled_shouldAllocateNearestSlot() {
+        ParkingSlot parkingSlot1 = new ParkingSlot(2);
+        ParkingSlot parkingSlot2 = new ParkingSlot(2);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE);
+        parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
+        Vehicle vehicle2 = new Vehicle("OD27M5160",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE);
+        parkingLotService.parkVehicle(vehicle2, Driver.HANDICAPPED);
+        ParkingSlot parkedSlot = parkingLotService.getParkedSlot(vehicle2);
+        Assert.assertEquals(parkingSlot1,parkedSlot);
+        Assert.assertEquals(1,parkingLotService.getParkedSpot(vehicle2));
+    }
+
+    @Test
+    public void givenVehicleNumbersToPark_whenVehicleIsLarge_shouldAllocateRequiredSpace() {
+        ParkingSlot parkingSlot1 = new ParkingSlot(4);
+        ParkingSlot parkingSlot2 = new ParkingSlot(5);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE);
+        parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
+        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.LARGE,Vehicle.VehicleColor.WHITE);
+        parkingLotService.parkVehicle(vehicle2, Driver.NORMAL);
+        ParkingSlot parkedSlot = parkingLotService.getParkedSlot(vehicle2);
+        Assert.assertEquals(parkingSlot1,parkedSlot);
+    }
+
 }

@@ -33,7 +33,23 @@ public class ParkingLotService {
         if(vehicle == null && driver == null)
             throw new ParkingLotException("Entered null",ParkingLotException.ExceptionType.ENTERED_NULL);
         parkingStrategy.parkVehicle(parkingSlots,vehicle,driver);
-        this.checkParkingSlotsFull();
+     //   this.directVehicle(vehicle,driver);
+      //  this.checkParkingSlotsFull();
+    }
+
+    private void directVehicle(Vehicle vehicle, Driver driver) {
+        for (int slot = 0; slot <= numberOfParkingSlots; slot++) {
+            if(currentSlot == numberOfParkingSlots)
+              currentSlot = 0;
+           if (parkingSlots.get(currentSlot).getOccupiedSpots() < parkingSlots.get(currentSlot).CAPACITY){
+             parkingSlots.get(currentSlot).parkVehicle(vehicle, driver);
+              currentSlot++;
+              return;
+         }
+          currentSlot++;
+         this.checkParkingSlotsFull();
+     }
+
     }
 
     private void checkParkingSlotsFull() {
