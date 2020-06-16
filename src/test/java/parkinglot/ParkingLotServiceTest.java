@@ -25,13 +25,14 @@ public class ParkingLotServiceTest {
     public void givenVehicleNumberToPark_whenParked_shouldReturnOccupiedSpotsInALot() {
         ParkingSlot parkingSlot1 = new ParkingSlot(1);
         ParkingSlot parkingSlot2 = new ParkingSlot(3);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingSlot1);
         parkingLotList.add(parkingSlot2);
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
-        parkingLotService.parkVehicle(new Vehicle("TS01AB1234"), Driver.NORMAL);
-        parkingLotService.parkVehicle(new Vehicle("TS02AB5678"), Driver.NORMAL);
-        parkingLotService.parkVehicle(new Vehicle("TS03AB1234"), Driver.NORMAL);
-        int occupiedSpotsInAlot = parkingLotService.getOccupiedSpotsInALot(parkingSlot2);
+        parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE),Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK), Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+        int occupiedSpotsInAlot = parkingLotService.getOccupiedSpotsInASlot(parkingSlot2);
         Assert.assertEquals(2,occupiedSpotsInAlot);
     }
 
@@ -43,11 +44,11 @@ public class ParkingLotServiceTest {
         parkingLotList.add(parkingSlot2);
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
         try {
-            parkingLotService.parkVehicle(new Vehicle("TS01AB1234"), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS02AB5678"), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS03AB1234"), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS04AB5678"), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS05AB4567"), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS04AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS05AB4567",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK), Driver.NORMAL);
         } catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.ALL_PARKING_LOTS_ARE_FULL,e.type);
         }

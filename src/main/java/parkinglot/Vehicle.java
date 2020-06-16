@@ -1,20 +1,34 @@
 package parkinglot;
 
 import java.util.Objects;
+import java.awt.*;
 
 public class Vehicle {
     private String vehicleNumber;
+    private final VehicleSize vehicleSize;
+    private final VehicleColor vehicleColor;
 
-
-
-    public Vehicle(String vehicleNumber ){
+    public Vehicle(String vehicleNumber, VehicleSize vehicleSize, VehicleColor vehicleColor ){
         if(vehicleNumber == null)
             throw new ParkingLotException("Entered Null", ParkingLotException.ExceptionType.ENTERED_NULL);
         if(vehicleNumber.length() == 0)
             throw new ParkingLotException("Entered Empty", ParkingLotException.ExceptionType.ENTERED_EMPTY);
         this.vehicleNumber = vehicleNumber;
+        this.vehicleSize = vehicleSize;
+        this.vehicleColor = vehicleColor;
     }
 
+    public VehicleColor getVehicleColor() {
+        return vehicleColor;
+    }
+
+    enum VehicleSize {
+        SMALL,LARGE
+    }
+
+    enum VehicleColor{
+        WHITE,BLACK
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -33,4 +47,8 @@ public class Vehicle {
         return vehicleNumber;
     }
 
+    public VehicleSize getVehicleSize() {
+        return vehicleSize;
     }
+
+}
