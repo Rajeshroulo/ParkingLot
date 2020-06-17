@@ -187,7 +187,7 @@ public class ParkingLotServiceTest {
     }
 
     @Test
-    public void givenParkedVehicles_whenSmallHandicappedDriverCarsFound_shouldReturnitsLocation(){
+    public void givenParkedVehicles_whenCarsParkedWithinLast30MinutesFound_shouldReturnVehicleslist(){
         ParkingSlot parkingSlot1 = new ParkingSlot(5);
         ParkingSlot parkingSlot2 = new ParkingSlot(5);
         List<ParkingSlot> parkingLotList = new ArrayList<>();
@@ -210,5 +210,31 @@ public class ParkingLotServiceTest {
         List<Vehicle> VehicleLocations = parkingLotService.getVehiclesBasedonSize(Vehicle.VehicleSize.SMALL);
         Assert.assertEquals(vehicleList,VehicleLocations);
     }
+
+    @Test
+    public void givenParkedVehicles_whenSmallHandicappedDriverCarsFound_shouldReturnitsLocation(){
+        ParkingSlot parkingSlot1 = new ParkingSlot(5);
+        ParkingSlot parkingSlot2 = new ParkingSlot(5);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.LARGE,
+                Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
+        parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
+        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW);
+        parkingLotService.parkVehicle(vehicle2, Driver.HANDICAPPED);
+        Vehicle vehicle3 = new Vehicle("OD23M0205",Vehicle.VehicleSize.LARGE,
+                Vehicle.VehicleColor.BLUE, Vehicle.VehicleBrand.TOYOTA);
+        parkingLotService.parkVehicle(vehicle3, Driver.NORMAL);
+        Vehicle vehicle4 = new Vehicle("OD27R5160",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.BMW);
+        parkingLotService.parkVehicle(vehicle4, Driver.HANDICAPPED);
+        long time = 30;
+        List<Vehicle> vehicleList = parkingLotService.getVehicleTimings(time);
+        Assert.assertEquals(4,vehicleList.size());
+    }
+
 
 }

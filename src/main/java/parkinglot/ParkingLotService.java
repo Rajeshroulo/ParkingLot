@@ -98,16 +98,16 @@ public class ParkingLotService {
     }
 
     private List<Vehicle> getListOfVehiclesInParkingLot() {
-        totalVehicles = this.getAllParkedDetails().stream()
+         return this.getAllParkedDetails().stream()
                 .map(ParkedDetails::getVehicle)
                 .collect(Collectors.toList());
-        return totalVehicles;
+
     }
 
     private List<ParkedDetails> getAllParkedDetails() {
         List<ParkedDetails> parkedDetailsList = new ArrayList<>();
-        for(int i = 0 ; i < numberOfParkingSlots ; i++){
-            Collection<ParkedDetails> parkedDetailsListInASlot = parkingSlots.get(i).parkingDetails.values();
+        for (ParkingSlot parkingSlot : parkingSlots) {
+            Collection<ParkedDetails> parkedDetailsListInASlot = parkingSlot.parkingDetails.values();
             parkedDetailsList.addAll(parkedDetailsListInASlot);
         }
         return parkedDetailsList;
@@ -139,5 +139,13 @@ public class ParkingLotService {
                 .collect(Collectors.toList());
     }
 
+    public List<Vehicle> getVehicleTimings(long time){
+        return this.getAllParkedDetails().stream()
+                .filter(parkedDetails -> (parkedDetails.getParkedTime() - System.currentTimeMillis()) * 0.000016667 <= time)
+                .map(ParkedDetails::getVehicle)
+                .collect(Collectors.toList());
+
+
+    }
 
 }
