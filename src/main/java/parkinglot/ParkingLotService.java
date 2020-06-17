@@ -1,5 +1,6 @@
 package parkinglot;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class ParkingLotService {
               return;
          }
           currentSlot++;
-        this.checkParkingSlotsFull();
+  //      this.checkParkingSlotsFull();
      }
 
     }
@@ -97,13 +98,20 @@ public class ParkingLotService {
     }
 
     private List<Vehicle> getListOfVehiclesInParkingLot() {
-        for(int i = 0;i<numberOfParkingSlots;i++){
-            Set<Vehicle> vehicles = parkingSlots.get(i).parkingDetails.keySet();
-            List<ParkedDetails> parkedDetailsList = parkingSlots.get(i).parkedDetailsList;
-            List<Vehicle> collect = parkedDetailsList.stream().map(ParkedDetails::getVehicle).collect(Collectors.toList());
-            totalVehicles.addAll(collect);
-        }
+        totalVehicles = this.getAllParkedDetails().stream()
+                .map(ParkedDetails::getVehicle)
+                .collect(Collectors.toList());
         return totalVehicles;
+    }
+
+    private List<ParkedDetails> getAllParkedDetails() {
+        List<ParkedDetails> parkedDetailsList = new ArrayList<>();
+        for(int i = 0 ; i < numberOfParkingSlots ; i++){
+            Collection<ParkedDetails> parkedDetailsListInASlot = parkingSlots.get(i).parkingDetails.values();
+            parkedDetailsList.addAll(parkedDetailsListInASlot);
+        }
+        return parkedDetailsList;
+
     }
 
     public int getNumberOfVehiclesInParkingLot(){
@@ -123,5 +131,13 @@ public class ParkingLotService {
                 .filter(vehicle -> vehicle.getVehicleBrand().equals(vehicleBrand))
                 .collect(Collectors.toList());
     }
+
+    public List<Vehicle> getVehiclesBasedonSize(Vehicle.VehicleSize vehicleSize) {
+        List<Vehicle> listOfVehiclesInParkingLot = this.getListOfVehiclesInParkingLot();
+        return listOfVehiclesInParkingLot.stream()
+                .filter(vehicle -> vehicle.getVehicleSize().equals(vehicleSize))
+                .collect(Collectors.toList());
+    }
+
 
 }

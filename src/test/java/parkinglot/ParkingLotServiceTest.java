@@ -30,9 +30,12 @@ public class ParkingLotServiceTest {
         parkingLotList.add(parkingSlot1);
         parkingLotList.add(parkingSlot2);
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
-        parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA),Driver.NORMAL);
-        parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW), Driver.NORMAL);
-        parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA),Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW), Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
         int occupiedSpotsInAlot = parkingLotService.getOccupiedSpotsInASlot(parkingSlot2);
         Assert.assertEquals(2,occupiedSpotsInAlot);
     }
@@ -45,11 +48,16 @@ public class ParkingLotServiceTest {
         parkingLotList.add(parkingSlot2);
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
         try {
-            parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS04AB5678",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
-            parkingLotService.parkVehicle(new Vehicle("TS05AB4567",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,
+                    Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS04AB5678",Vehicle.VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+            parkingLotService.parkVehicle(new Vehicle("TS05AB4567",Vehicle.VehicleSize.SMALL,
+                    Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
         } catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.ALL_PARKING_LOTS_ARE_FULL,e.type);
         }
@@ -161,19 +169,46 @@ public class ParkingLotServiceTest {
         parkingLotList.add(parkingSlot1);
         parkingLotList.add(parkingSlot2);
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
-        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
         parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
-        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW);
+        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW);
         parkingLotService.parkVehicle(vehicle2, Driver.NORMAL);
-        Vehicle vehicle3 = new Vehicle("OD23M0205",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
+        Vehicle vehicle3 = new Vehicle("OD23M0205",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLUE, Vehicle.VehicleBrand.TOYOTA);
         parkingLotService.parkVehicle(vehicle3, Driver.NORMAL);
-        Vehicle vehicle4 = new Vehicle("OD27R5160",Vehicle.VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.BMW);
+        Vehicle vehicle4 = new Vehicle("OD27R5160",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.BMW);
         parkingLotService.parkVehicle(vehicle4, Driver.NORMAL);
         List<Vehicle> vehicleList = Arrays.asList(vehicle2,vehicle4);
         List<Vehicle> VehicleLocations = parkingLotService.getVehiclesBasedonBrand(Vehicle.VehicleBrand.BMW);
         Assert.assertEquals(vehicleList,VehicleLocations);
     }
 
-
+    @Test
+    public void givenParkedVehicles_whenSmallHandicappedDriverCarsFound_shouldReturnitsLocation(){
+        ParkingSlot parkingSlot1 = new ParkingSlot(5);
+        ParkingSlot parkingSlot2 = new ParkingSlot(5);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.LARGE,
+                Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
+        parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
+        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW);
+        parkingLotService.parkVehicle(vehicle2, Driver.HANDICAPPED);
+        Vehicle vehicle3 = new Vehicle("OD23M0205",Vehicle.VehicleSize.LARGE,
+                Vehicle.VehicleColor.BLUE, Vehicle.VehicleBrand.TOYOTA);
+        parkingLotService.parkVehicle(vehicle3, Driver.NORMAL);
+        Vehicle vehicle4 = new Vehicle("OD27R5160",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.BMW);
+        parkingLotService.parkVehicle(vehicle4, Driver.HANDICAPPED);
+        List<Vehicle> vehicleList = Arrays.asList(vehicle2,vehicle4);
+        List<Vehicle> VehicleLocations = parkingLotService.getVehiclesBasedonSize(Vehicle.VehicleSize.SMALL);
+        Assert.assertEquals(vehicleList,VehicleLocations);
+    }
 
 }

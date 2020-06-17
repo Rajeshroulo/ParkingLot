@@ -51,6 +51,4 @@ public class ParkedDetails {
         return Objects.hash(vehicle, parkedTime, spot);
     }
 
-
-
 }
