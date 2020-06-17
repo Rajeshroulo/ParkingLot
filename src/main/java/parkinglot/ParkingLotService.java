@@ -45,7 +45,7 @@ public class ParkingLotService {
               return;
          }
           currentSlot++;
-         this.checkParkingSlotsFull();
+        this.checkParkingSlotsFull();
      }
 
     }
