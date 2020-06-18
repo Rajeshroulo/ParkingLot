@@ -66,7 +66,8 @@ public class ParkingSlot {
         if (vehicle == null)
             throw new ParkingLotException("Entered Null", ParkingLotException.ExceptionType.ENTERED_NULL);
         if (!parkingDetails.containsKey(vehicle))
-            throw new ParkingLotException("Entered vehicle number is not present", ParkingLotException.ExceptionType.NUMBER_IS_NOT_PRESENT);
+            throw new ParkingLotException("Entered vehicle number is not present",
+                    ParkingLotException.ExceptionType.NUMBER_IS_NOT_PRESENT);
         this.setParkedSpot(vehicle);
         parkingDetails.remove(vehicle);
         parkingLotOwner.availableSpace(CAPACITY - parkingDetails.size());

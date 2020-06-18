@@ -12,7 +12,6 @@ public class ParkingLotService {
 
     private final int numberOfParkingSlots;
     List<ParkingSlot> parkingSlots;
-    List<Vehicle> totalVehicles = new ArrayList<>();
     int currentSlot = 0;
 
     ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
