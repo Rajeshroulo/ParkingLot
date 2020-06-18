@@ -1,8 +1,8 @@
 package parkinglot;
 
 public class ParkingLotOwner {
-    public void full(boolean Status) {
-        boolean full = Status;
+    public boolean full(boolean Status) {
+        return Status;
     }
 
 
