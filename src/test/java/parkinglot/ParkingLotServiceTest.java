@@ -236,5 +236,32 @@ public class ParkingLotServiceTest {
         Assert.assertEquals(4,vehicleList.size());
     }
 
+    @Test
+    public void givenParkedVehicles_whenVehicleDeatilsRequired_shouldReturnItsVehicleNumbers(){
+        ParkingSlot parkingSlot1 = new ParkingSlot(4);
+        ParkingSlot parkingSlot2 = new ParkingSlot(5);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
+        parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);
+        Vehicle vehicle2 = new Vehicle("AP30M2364",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW);
+        parkingLotService.parkVehicle(vehicle2, Driver.NORMAL);
+        Vehicle vehicle3 = new Vehicle("OD23M0205",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLUE, Vehicle.VehicleBrand.TOYOTA);
+        parkingLotService.parkVehicle(vehicle3, Driver.NORMAL);
+        Vehicle vehicle4 = new Vehicle("OD27R5160",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.BMW);
+        parkingLotService.parkVehicle(vehicle4, Driver.NORMAL);
+        List<String> vehicleNumbers = Arrays.asList("AP30M2832","AP30M2364","OD23M0205","OD27R5160");
+        List<String> allVehicleNumbers = parkingLotService.getAllVehicleDetails();
+        boolean VehicleNumberDetails = vehicleNumbers.containsAll(allVehicleNumbers);
+        Assert.assertTrue(VehicleNumberDetails);
+    }
+
+
 
 }

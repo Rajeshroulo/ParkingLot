@@ -36,33 +36,6 @@ public class ParkingLotService {
         parkingStrategy.parkVehicle(parkingSlots,vehicle,driver);
     }
 
-    private void directVehicle(Vehicle vehicle, Driver driver) {
-        for (int slot = 0; slot <= numberOfParkingSlots; slot++) {
-            if(currentSlot == numberOfParkingSlots)
-              currentSlot = 0;
-           if (parkingSlots.get(currentSlot).getOccupiedSpots() < parkingSlots.get(currentSlot).CAPACITY){
-             parkingSlots.get(currentSlot).parkVehicle(vehicle, driver);
-              currentSlot++;
-              return;
-         }
-          currentSlot++;
-  //      this.checkParkingSlotsFull();
-     }
-
-    }
-
-    private void checkParkingSlotsFull() {
-        int numberOfLotsFull = 0;
-        for (ParkingSlot parkingLot: parkingSlots) {
-            if(parkingLot.getOccupiedSpots() == parkingLot.CAPACITY)
-                numberOfLotsFull++;
-        }
-        if(numberOfLotsFull == numberOfParkingSlots)
-            parkingLotOwner.full(true);
-            airportSecurity.full(true);
-        throw new ParkingLotException("All lots are full",ParkingLotException.ExceptionType.ALL_PARKING_LOTS_ARE_FULL);
-    }
-
     public int getOccupiedSpotsInASlot(ParkingSlot parkingSlot) {
         for (int i = 0; i < numberOfParkingSlots; i++) {
             if (parkingSlots.get(i).equals(parkingSlot))
@@ -144,8 +117,12 @@ public class ParkingLotService {
                 .filter(parkedDetails -> (parkedDetails.getParkedTime() - System.currentTimeMillis()) * 0.000016667 <= time)
                 .map(ParkedDetails::getVehicle)
                 .collect(Collectors.toList());
+    }
 
-
+    public List<String> getAllVehicleDetails() {
+        return this.getAllParkedDetails().stream()
+                .map(parkedDetails -> parkedDetails.getVehicle().getVehicleNumber())
+                .collect(Collectors.toList());
     }
 
 }
