@@ -74,7 +74,6 @@ public class ParkingSlot {
         return true;
     }
 
-
     public int getParkedSpot(Vehicle vehicle) {
         return parkingDetails.get(vehicle).getSpot();
     }

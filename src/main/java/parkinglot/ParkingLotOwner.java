@@ -5,7 +5,6 @@ public class ParkingLotOwner {
         return Status;
     }
 
-
     public void availableSpace(int spaces) {
         System.out.println("Available spaces are" + spaces);
     }

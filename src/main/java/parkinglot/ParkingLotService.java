@@ -14,11 +14,7 @@ public class ParkingLotService {
     List<ParkingSlot> parkingSlots;
     int currentSlot = 0;
 
-    ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
-    AirportSecurity airportSecurity = new AirportSecurity();
     ParkingStrategy parkingStrategy = new ParkingStrategy();
-
-
 
     public ParkingLotService(List<ParkingSlot> parkingSlots) {
         this.parkingSlots = parkingSlots;

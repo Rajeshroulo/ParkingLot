@@ -1,31 +1,51 @@
 package parkinglot;
 
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.MockitoRule;
+
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@RunWith(MockitoJUnitRunner.class)
+
 public class ParkingLotServiceTest {
 
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
+
+    @InjectMocks
     List<ParkingSlot> parkingLotList = new ArrayList<>();
+
+    @Mock
+    ParkingSlot parkingSlot1;
+    @Mock
+    ParkingSlot parkingSlot2;
+
 
     @Test
     public void givenNumberOfParkingLots_whenCreated_shouldReturnNumberOfLots() {
-        ParkingSlot parkingSlot1 = new ParkingSlot(4);
-        ParkingSlot parkingSlot2 = new ParkingSlot(5);
         parkingLotList.add(parkingSlot1);
         parkingLotList.add(parkingSlot2);
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
-        int numberOfParkingLots = parkingLotService.getNumberOfParkingSlots();
-        Assert.assertEquals(2,numberOfParkingLots);
+        int numberOfParkingSlots = parkingLotService.getNumberOfParkingSlots();
+        Assert.assertEquals(2,numberOfParkingSlots);
     }
 
     @Test
     public void givenVehicleNumberToPark_whenParked_shouldReturnOccupiedSpotsInALot() {
-        ParkingSlot parkingSlot1 = new ParkingSlot(1);
-        ParkingSlot parkingSlot2 = new ParkingSlot(3);
         List<ParkingSlot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingSlot1);
         parkingLotList.add(parkingSlot2);
@@ -36,9 +56,28 @@ public class ParkingLotServiceTest {
                 Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW), Driver.NORMAL);
         parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,
                 Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+        Mockito.when(parkingSlot2.getOccupiedSpots()).thenReturn(2);
         int occupiedSpotsInAlot = parkingLotService.getOccupiedSpotsInASlot(parkingSlot2);
         Assert.assertEquals(2,occupiedSpotsInAlot);
     }
+
+    @Test
+    public void givenVehicleNumberToPark_whenParked_shouldReturnOccupiedSpotsInASlot() {
+        List<ParkingSlot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingSlot1);
+        parkingLotList.add(parkingSlot2);
+        ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+        parkingLotService.parkVehicle(new Vehicle("TS01AB1234",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA),Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS02AB5678",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.BLACK,Vehicle.VehicleBrand.BMW), Driver.NORMAL);
+        parkingLotService.parkVehicle(new Vehicle("TS03AB1234",Vehicle.VehicleSize.SMALL,
+                Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA), Driver.NORMAL);
+        Mockito.when(parkingSlot1.getOccupiedSpots()).thenReturn(1);
+        int occupiedSpotsInAlot = parkingLotService.getOccupiedSpotsInASlot(parkingSlot1);
+        Assert.assertEquals(1,occupiedSpotsInAlot);
+    }
+
 
     @Test
     public void givenVehicleNumberToPark_whenAllParkingLotsAreFull_shouldThrowException() {
@@ -255,6 +294,7 @@ public class ParkingLotServiceTest {
         parkingLotList.add(parkingSlot1);
         parkingLotList.add(parkingSlot2);
         ParkingLotService parkingLotService = new ParkingLotService(parkingLotList);
+
         Vehicle vehicle1 = new Vehicle("AP30M2832",Vehicle.VehicleSize.SMALL,
                 Vehicle.VehicleColor.BLUE,Vehicle.VehicleBrand.TOYOTA);
         parkingLotService.parkVehicle(vehicle1, Driver.NORMAL);

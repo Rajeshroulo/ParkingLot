@@ -1,14 +1,26 @@
 package parkinglot;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.MockitoRule;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static parkinglot.ParkingLotException.ExceptionType.*;
 
+@RunWith(MockitoJUnitRunner.class)
+
 public class ParkingSlotProblemTest {
 
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
+
+    @Mock
     ParkingSlot parkingSlot;
 
     @Before
@@ -26,7 +38,7 @@ public class ParkingSlotProblemTest {
      public void givenVehicle_whenParkedinParkingLot_shouldReturnCorrectSize(){
      parkingSlot.parkVehicle(new Vehicle("AP 30 M 2832",Vehicle.VehicleSize.SMALL,
              Vehicle.VehicleColor.WHITE,Vehicle.VehicleBrand.TOYOTA),Driver.NORMAL);
-     int size = parkingSlot.getOccupiedSpots();
+        int size = parkingSlot.getOccupiedSpots();
      assertEquals(1,size);
    }
 
